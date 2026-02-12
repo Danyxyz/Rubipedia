@@ -24,6 +24,7 @@ const importDataLink = document.getElementById('importDataLink');
 const importFileInput = document.getElementById('importFileInput');
 const searchInput = document.getElementById('searchInput');
 const searchResults = document.getElementById('searchResults');
+const toolbarButtons = document.querySelectorAll('.toolbar-btn');
 
 // Current page state
 let currentPageId = null;
@@ -180,6 +181,147 @@ copyBtn.addEventListener('click', () => {
         console.error(err);
     });
 });
+
+// Editing Toolbar Functionality
+toolbarButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const action = btn.dataset.action;
+        handleToolbarAction(action);
+    });
+});
+
+function handleToolbarAction(action) {
+    const textarea = pageContentInput;
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    const selectedText = textarea.value.substring(start, end);
+    const beforeText = textarea.value.substring(0, start);
+    const afterText = textarea.value.substring(end);
+    
+    let newText = '';
+    let cursorOffset = 0;
+    
+    switch(action) {
+        case 'bold':
+            if (selectedText) {
+                newText = `'''${selectedText}'''`;
+                cursorOffset = newText.length;
+            } else {
+                newText = `'''bold text'''`;
+                cursorOffset = 3; // Position cursor between the marks
+            }
+            break;
+            
+        case 'italic':
+            if (selectedText) {
+                newText = `''${selectedText}''`;
+                cursorOffset = newText.length;
+            } else {
+                newText = `''italic text''`;
+                cursorOffset = 2;
+            }
+            break;
+            
+        case 'heading2':
+            if (selectedText) {
+                newText = `== ${selectedText} ==`;
+                cursorOffset = newText.length;
+            } else {
+                newText = `== Heading 2 ==`;
+                cursorOffset = 3;
+            }
+            break;
+            
+        case 'heading3':
+            if (selectedText) {
+                newText = `=== ${selectedText} ===`;
+                cursorOffset = newText.length;
+            } else {
+                newText = `=== Heading 3 ===`;
+                cursorOffset = 4;
+            }
+            break;
+            
+        case 'bullet':
+            const lines = selectedText ? selectedText.split('\n') : ['List item 1', 'List item 2', 'List item 3'];
+            newText = lines.map(line => `* ${line.trim()}`).join('\n');
+            cursorOffset = newText.length;
+            break;
+            
+        case 'link':
+            const url = prompt('Enter URL:', 'https://');
+            if (url) {
+                const linkText = selectedText || 'link text';
+                newText = `[${url} ${linkText}]`;
+                cursorOffset = newText.length;
+            } else {
+                return; // User cancelled
+            }
+            break;
+            
+        case 'table':
+            insertTable();
+            return; // insertTable handles everything
+    }
+    
+    // Insert the new text
+    textarea.value = beforeText + newText + afterText;
+    
+    // Set cursor position
+    const newCursorPos = start + cursorOffset;
+    textarea.focus();
+    textarea.setSelectionRange(newCursorPos, newCursorPos);
+}
+
+function insertTable() {
+    const rows = prompt('Number of rows:', '3');
+    const cols = prompt('Number of columns:', '3');
+    
+    if (!rows || !cols || isNaN(rows) || isNaN(cols)) {
+        return;
+    }
+    
+    const numRows = parseInt(rows);
+    const numCols = parseInt(cols);
+    
+    if (numRows < 1 || numCols < 1 || numRows > 20 || numCols > 10) {
+        alert('Please enter valid numbers (rows: 1-20, columns: 1-10)');
+        return;
+    }
+    
+    // Create table markup
+    let tableText = '\n\n{| class="wikitable"\n';
+    
+    // Header row
+    tableText += '! Header 1';
+    for (let j = 1; j < numCols; j++) {
+        tableText += ` !! Header ${j + 1}`;
+    }
+    tableText += '\n';
+    
+    // Data rows
+    for (let i = 0; i < numRows; i++) {
+        tableText += '|-\n';
+        tableText += `| Row ${i + 1} Col 1`;
+        for (let j = 1; j < numCols; j++) {
+            tableText += ` || Row ${i + 1} Col ${j + 1}`;
+        }
+        tableText += '\n';
+    }
+    
+    tableText += '|}\n\n';
+    
+    // Insert at cursor position
+    const textarea = pageContentInput;
+    const start = textarea.selectionStart;
+    const beforeText = textarea.value.substring(0, start);
+    const afterText = textarea.value.substring(start);
+    
+    textarea.value = beforeText + tableText + afterText;
+    textarea.focus();
+    textarea.setSelectionRange(start + tableText.length, start + tableText.length);
+}
 
 // ===== PAGE MANAGEMENT FUNCTIONS =====
 
@@ -485,14 +627,80 @@ function importPages(file) {
 
 // ===== END PAGE MANAGEMENT =====
 
+// Parse wiki-style table
+function parseTable(tableContent) {
+    const lines = tableContent.split('\n').map(l => l.trim()).filter(l => l);
+    let html = '<table class="wiki-table">';
+    let inHeader = false;
+    
+    for (let line of lines) {
+        if (line.startsWith('!')) {
+            // Header row
+            if (!inHeader) {
+                html += '<thead><tr>';
+                inHeader = true;
+            }
+            const headers = line.substring(1).split('!!').map(h => h.trim());
+            headers.forEach(header => {
+                html += `<th>${formatInlineText(header)}</th>`;
+            });
+        } else if (line === '|-') {
+            // Row separator
+            if (inHeader) {
+                html += '</tr></thead><tbody>';
+                inHeader = false;
+            } else {
+                html += '</tr><tr>';
+            }
+        } else if (line.startsWith('|') && !line.startsWith('|}')) {
+            // Data cell
+            if (inHeader) {
+                html += '</tr></thead><tbody><tr>';
+                inHeader = false;
+            }
+            const cells = line.substring(1).split('||').map(c => c.trim());
+            cells.forEach(cell => {
+                html += `<td>${formatInlineText(cell)}</td>`;
+            });
+        }
+    }
+    
+    html += '</tr></tbody></table>';
+    return html;
+}
+
 // Parse wiki-style content
 function parseWikiContent(text) {
+    // First, extract and process tables
+    const tablePlaceholders = [];
+    let tableCounter = 0;
+    
+    // Replace tables with placeholders
+    text = text.replace(/\{\|.*?\n([\s\S]*?)\n\|\}/g, (match, tableContent) => {
+        const tableHtml = parseTable(tableContent);
+        const placeholder = `__TABLE_${tableCounter}__`;
+        tablePlaceholders[tableCounter] = tableHtml;
+        tableCounter++;
+        return placeholder;
+    });
+    
     let html = '';
     const lines = text.split('\n');
     let inList = false;
 
     for (let line of lines) {
         line = line.trim();
+        
+        // Check for table placeholder
+        if (line.startsWith('__TABLE_') && line.endsWith('__')) {
+            if (inList) {
+                html += '</ul>';
+                inList = false;
+            }
+            const tableIndex = parseInt(line.match(/__TABLE_(\d+)__/)[1]);
+            html += tablePlaceholders[tableIndex];
+            continue;
+        }
 
         // Skip empty lines
         if (line === '') {

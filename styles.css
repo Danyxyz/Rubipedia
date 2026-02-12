@@ -548,6 +548,44 @@ nav .container {
     font-style: italic;
 }
 
+/* Editing Toolbar */
+.editing-toolbar {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 10px;
+    padding: 10px;
+    background: linear-gradient(135deg, #0a0604 0%, #1a1108 100%);
+    border: 1px solid #d4af37;
+    border-bottom: none;
+    flex-wrap: wrap;
+}
+
+.toolbar-btn {
+    padding: 8px 14px;
+    background: #000000;
+    border: 1px solid #d4af37;
+    color: #d4af37;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.85em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.toolbar-btn:hover {
+    background: #d4af37;
+    color: #000000;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+    transform: translateY(-2px);
+}
+
+.toolbar-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+}
+
 /* Category Selection */
 .category-select {
     display: flex;
@@ -832,6 +870,56 @@ nav .container {
     color: #e5c680;
     font-family: 'Playfair Display', serif;
     font-style: italic;
+}
+
+/* Wiki Tables */
+.wiki-table {
+    width: 100%;
+    margin: 25px 0;
+    border-collapse: collapse;
+    background: linear-gradient(135deg, #0a0604 0%, #1a1108 100%);
+    border: 2px solid #d4af37;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+}
+
+.wiki-table thead {
+    background: linear-gradient(135deg, #1a1108 0%, #2a1810 100%);
+}
+
+.wiki-table th {
+    padding: 15px;
+    text-align: left;
+    color: #d4af37;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border: 1px solid #d4af37;
+    font-size: 0.95em;
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+}
+
+.wiki-table td {
+    padding: 12px 15px;
+    color: #c9b382;
+    border: 1px solid #5a4628;
+    line-height: 1.6;
+}
+
+.wiki-table tbody tr {
+    transition: all 0.3s;
+}
+
+.wiki-table tbody tr:hover {
+    background: rgba(212, 175, 55, 0.05);
+    box-shadow: inset 0 0 15px rgba(212, 175, 55, 0.1);
+}
+
+.wiki-table tbody tr:nth-child(even) {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.wiki-table tbody tr:nth-child(even):hover {
+    background: rgba(212, 175, 55, 0.08);
 }
 
 .article-footer {

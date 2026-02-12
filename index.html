@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DejaRu Archives 𓂀 Fanning The Flames of Man's Awakening</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="flame-overlay"></div>
+        <div class="eye-of-horus">𓂀</div>
+        <div class="container">
+            <div class="mask-symbol">🎭</div>
+            <h1 class="site-title">
+                <span class="hieroglyph">𓂀</span> DEJARU ARCHIVES <span class="hieroglyph">𓂀</span>
+            </h1>
+            <p class="tagline">Fanning The Flames of Man's Awakening</p>
+            <p class="subtitle">@DejaRu22 | Ancient Wisdom Meets Modern Truth</p>
+            <div class="lotus-divider">𓆃 𓆃 𓆃</div>
+        </div>
+    </header>
+
+    <nav class="container">
+        <div class="nav-links">
+            <a href="#" class="active"><span class="icon">Ω</span> Inculcations</a>
+        </div>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="🔍 Search the sacred archives...">
+            <div id="searchResults" class="search-results" style="display: none;"></div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="content-wrapper">
+            <aside class="sidebar">
+                <div class="tools-box">
+                    <h3>𓂀 EDIT</h3>
+                    <ul>
+                        <li><a href="#" id="newPageLink">✦ New Inculcation</a></li>
+                        <li><a href="#" id="viewPagesLink">✦ All Archives</a></li>
+                    </ul>
+                </div>
+                <div class="tools-box">
+                    <h3>𓆃 PRESERVE</h3>
+                    <ul>
+                        <li><a href="#" id="exportDataLink">✦ Export Wisdom</a></li>
+                        <li><a href="#" id="importDataLink">✦ Import Teachings</a></li>
+                    </ul>
+                    <input type="file" id="importFileInput" accept=".json" style="display: none;">
+                </div>
+                <div class="tools-box" id="savedPagesBox" style="display: none;">
+                    <h3>Ω CONTENTS</h3>
+                    <ul id="savedPagesList"></ul>
+                </div>
+                <div class="tools-box" id="tocBox" style="display: none;">
+                    <h3>Ω CONTENTS</h3>
+                    <ul id="tableOfContents"></ul>
+                </div>
+            </aside>
+
+            <article class="main-content">
+                <div class="edit-section" id="editSection">
+                    <h2>CREATE SACRED TEXT</h2>
+                    <div class="form-group">
+                        <label for="pageTitle">Title of Awakening</label>
+                        <input type="text" id="pageTitle" placeholder="e.g., On The Nature of Obsession and Power - @DejaRu22">
+                    </div>
+                    <div class="form-group">
+                        <label for="pageContent">Wisdom & Teachings</label>
+                        <textarea id="pageContent" rows="12" placeholder="Document the flames of wisdom from @DejaRu22...
+
+Format with ancient structure:
+== THE AWAKENING ==
+Core truths that shatter limiting beliefs
+
+== SACRED INSIGHTS ==
+* First principle of transformation
+* Second truth of power
+* Third pillar of obsession
+
+== DEEPER WISDOM ==
+'''EMPHASIZED TRUTH''' - It comes from within
+''Subtle wisdom'' - The path reveals itself"></textarea>
+                    </div>
+                    <button id="generateBtn" class="btn-primary">IGNITE THE FLAME</button>
+                    <button id="savePageBtn" class="btn-primary" style="display: none;">UPDATE WISDOM</button>
+                    <button id="clearBtn" class="btn-secondary">Clear All</button>
+                </div>
+
+                <div class="display-section" id="displaySection" style="display: none;">
+                    <div class="page-actions">
+                        <button id="newPageBtn" class="btn-primary">New Teaching</button>
+                        <button id="editBtn" class="btn-secondary">Edit</button>
+                        <button id="deleteBtn" class="btn-delete">Terminate</button>
+                        <button id="copyBtn" class="btn-secondary">Copy</button>
+                    </div>
+                    <h1 id="displayTitle" class="article-title"></h1>
+                    <div class="article-metadata">
+                        <p><span class="hieroglyph">𓂀</span> From the Archives of @DejaRu22 <span class="hieroglyph">𓆃</span></p>
+                    </div>
+                    <hr>
+                    <div id="displayContent" class="article-content"></div>
+                    <hr>
+                    <div class="article-footer">
+                        <p class="timestamp">Preserved: <span id="lastEdited"></span></p>
+                        <p class="footer-quote">"The flames of awakening burn eternal."</p>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-symbols">𓂀 𓆃 Ω 🪬 𓆃 𓂀</div>
+            <p class="footer-main">DEJARU ARCHIVES</p>
+            <p class="footer-tagline">Fanning The Flames of Man's Awakening Since 2026</p>
+            <p class="footer-credit">@DejaRu22 | Ancient Wisdom • Modern Truth • Eternal Transformation</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

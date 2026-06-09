@@ -3,66 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DejaRu Archives 𓂀 Fanning The Flames of Man's Awakening</title>
+    <title>Rubipedia</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#9400D3">
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@400;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@400;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 </head>
 <body>
+    <a href="#mainContent" class="skip-link">Skip to main content</a>
     <header>
+        <div class="banner-image-container">
+            <img src="Images/banner.png" alt="Rubipedia Banner" class="header-banner" loading="lazy">
+        </div>
         <div class="flame-overlay"></div>
-        <div class="eye-of-horus">𓂀</div>
+        <div class="moon-container">
+            <div class="moon" id="animatedMoon">
+                <div class="moon-phase"></div>
+            </div>
+        </div>
         <div class="container">
-            <div class="mask-symbol">🎭</div>
+            <div class="mask-symbol">🌕</div>
             <h1 class="site-title">
-                <span class="hieroglyph">𓂀</span> DEJARU ARCHIVES <span class="hieroglyph">𓂀</span>
+                RUBIPEDIA
             </h1>
-            <p class="tagline">Fanning The Flames of Man's Awakening</p>
-            <p class="subtitle">@DejaRu22 | Ancient Wisdom Meets Modern Truth</p>
-            <div class="lotus-divider">𓆃 𓆃 𓆃</div>
+            <p class="tagline">fixated on infinity 𓂀 preternatural inculcations & anagoge 𓆃  fanning the flames of man’s awakening</p>
+            <p class="subtitle">@DejaRu22 | Unofficial Site</p>
+            <div class="lotus-divider">🪬</div>
         </div>
     </header>
 
-    <nav class="container">
+    <nav class="container" aria-label="Main navigation">
         <div class="nav-links">
-            <a href="#" class="active"><span class="icon">Ω</span> Inculcations</a>
+            <a href="#" id="homeLink" class="active" aria-label="Home - View all inculcations"><span class="icon" aria-hidden="true">Ω</span> Inculcations</a>
+            <a href="media.html" aria-label="Media Gallery"><span class="icon" aria-hidden="true">✧</span> Media Gallery</a>
+            <button id="navNewPageBtn" class="btn-primary" style="margin-left: 20px;" aria-label="Create a new inculcation">✦ New Inculculation</button>
+            <button id="navVoiceNotesBtn" class="btn-primary" style="margin-left: 10px;" aria-label="View Voice Notes">🎙 Voice Notes</button>
+            <button id="themeToggleBtn" class="btn-secondary" style="margin-left: 10px;" aria-label="Toggle light/dark mode" title="Toggle theme">☀</button>
         </div>
         <div class="search-container">
-            <input type="text" id="searchInput" placeholder="🔍 Search the sacred archives...">
+            <input type="text" id="searchInput" placeholder="🔍 Search any Topic or Keyword">
             <div id="searchResults" class="search-results" style="display: none;"></div>
         </div>
     </nav>
 
-    <main class="container">
+    <main class="container" id="mainContent">
+        <!-- Table of Contents Welcome View (Full Width) -->
+        <div class="toc-view-fullwidth" id="tocView" style="display: none;">
+            <div class="toc-header">
+                <h1 class="toc-title">
+                    <span class="hieroglyph">🎭</span> SACRED ARCHIVES <span class="hieroglyph">🎭</span>
+                </h1>
+                <p class="toc-subtitle">Browse the collected wisdom of @DejaRu22</p>
+                <div class="lotus-divider">✦ ⋆ ☆ ⋆ ✦</div>
+            </div>
+            
+            <div id="tocGrid" class="toc-grid">
+                <!-- Cards will be dynamically populated here -->
+            </div>
+            
+            <div class="toc-empty" id="tocEmpty" style="display: none;">
+                <p>No wisdom archived yet. Create your first teaching!</p>
+                <button class="btn-primary" onclick="createNewPage()">Begin the Journey</button>
+            </div>
+        </div>
+
         <div class="content-wrapper">
             <aside class="sidebar">
                 <div class="tools-box">
-                    <h3>𓂀 EDIT</h3>
+                    <h3>✦ EDIT ✦</h3>
                     <ul>
-                        <li><a href="#" id="newPageLink">✦ New Inculcation</a></li>
-                        <li><a href="#" id="viewPagesLink">✦ All Archives</a></li>
+                        <li><a href="#" id="newPageLink">☆ New Inculcation</a></li>
+                        <li><a href="#" id="viewPagesLink">☆ All Archives</a></li>
                     </ul>
                 </div>
                 <div class="tools-box">
-                    <h3>𓆃 PRESERVE</h3>
+                    <h3>⋆ PRESERVE ⋆</h3>
                     <ul>
-                        <li><a href="#" id="exportDataLink">✦ Export Wisdom</a></li>
-                        <li><a href="#" id="importDataLink">✦ Import Teachings</a></li>
+                        <li><a href="#" id="exportDataLink">☆ Export Wisdom</a></li>
+                        <li><a href="#" id="importDataLink">☆ Import Teachings</a></li>
+                        <li><a href="#" id="syncProjectLink">☆ Sync Everything to Project Files</a></li>
                     </ul>
                     <input type="file" id="importFileInput" accept=".json" style="display: none;">
                 </div>
                 <div class="tools-box" id="savedPagesBox" style="display: none;">
-                    <h3>Ω CONTENTS</h3>
+                    <h3>☽ CONTENTS ☾</h3>
                     <ul id="savedPagesList"></ul>
                 </div>
                 <div class="tools-box" id="tocBox" style="display: none;">
-                    <h3>Ω CONTENTS</h3>
+                    <h3>☽ CONTENTS ☾</h3>
                     <ul id="tableOfContents"></ul>
                 </div>
             </aside>
 
             <article class="main-content">
+
                 <div class="edit-section" id="editSection">
                     <h2>CREATE SACRED TEXT</h2>
                     <div class="form-group">
@@ -70,30 +107,71 @@
                         <input type="text" id="pageTitle" placeholder="e.g., On The Nature of Obsession and Power - @DejaRu22">
                     </div>
                     <div class="form-group">
+                        <label for="pageTags">Tags (comma-separated)</label>
+                        <input type="text" id="pageTags" placeholder="e.g., health, testosterone, supplements" maxlength="500">
+                    </div>
+                    <div class="form-group">
                         <label for="pageContent">Wisdom & Teachings</label>
                         <div class="editing-toolbar">
-                            <button type="button" class="toolbar-btn" data-action="bold" title="Bold Text">'''B'''</button>
-                            <button type="button" class="toolbar-btn" data-action="italic" title="Italic Text">''I''</button>
-                            <button type="button" class="toolbar-btn" data-action="heading2" title="Heading 2">=H2=</button>
-                            <button type="button" class="toolbar-btn" data-action="heading3" title="Heading 3">=H3=</button>
-                            <button type="button" class="toolbar-btn" data-action="bullet" title="Bullet List">* List</button>
-                            <button type="button" class="toolbar-btn" data-action="link" title="Insert Link">🔗 Link</button>
-                            <button type="button" class="toolbar-btn" data-action="table" title="Insert Table">📋 Table</button>
+                            <div class="toolbar-group">
+                                <button type="button" class="toolbar-btn" data-action="bold" title="Bold (Ctrl+B)"><b>B</b></button>
+                                <button type="button" class="toolbar-btn" data-action="italic" title="Italic (Ctrl+I)"><i>I</i></button>
+                                <button type="button" class="toolbar-btn" data-action="strikethrough" title="Strikethrough"><s>S</s></button>
+                                <button type="button" class="toolbar-btn" data-action="inlinecode" title="Inline Code">`code`</button>
+                            </div>
+                            <div class="toolbar-sep"></div>
+                            <div class="toolbar-group">
+                                <button type="button" class="toolbar-btn toolbar-heading" data-action="heading1" title="Heading 1">H1</button>
+                                <button type="button" class="toolbar-btn toolbar-heading" data-action="heading2" title="Heading 2">H2</button>
+                                <button type="button" class="toolbar-btn toolbar-heading" data-action="heading3" title="Heading 3">H3</button>
+                            </div>
+                            <div class="toolbar-sep"></div>
+                            <div class="toolbar-group">
+                                <button type="button" class="toolbar-btn" data-action="bullet" title="Bullet List">• Bullet</button>
+                                <button type="button" class="toolbar-btn" data-action="numbered" title="Numbered List">1. List</button>
+                            </div>
+                            <div class="toolbar-sep"></div>
+                            <div class="toolbar-group">
+                                <button type="button" class="toolbar-btn" data-action="blockquote" title="Blockquote">❝ Quote</button>
+                                <button type="button" class="toolbar-btn" data-action="codeblock" title="Code Block">⌥ Code</button>
+                                <button type="button" class="toolbar-btn" data-action="hr" title="Horizontal Rule">— HR</button>
+                            </div>
+                            <div class="toolbar-sep"></div>
+                            <div class="toolbar-group">
+                                <button type="button" class="toolbar-btn" data-action="link" title="Insert Link">🔗 Link</button>
+                                <button type="button" class="toolbar-btn" data-action="table" title="Insert Table">⊞ Table</button>
+                            </div>
                         </div>
-                        <textarea id="pageContent" rows="12" placeholder="Document the flames of wisdom from @DejaRu22...
+                        <div class="format-hint">
+                            <span class="format-hint-toggle" id="formatHintToggle">? Format Guide</span>
+                            <div class="format-hint-content" id="formatHintContent" style="display:none;">
+                                <span class="hint-syntax">'''bold'''</span><span class="hint-desc">Bold text</span>
+                                <span class="hint-syntax">''italic''</span><span class="hint-desc">Italic text</span>
+                                <span class="hint-syntax">~~strike~~</span><span class="hint-desc">Strikethrough</span>
+                                <span class="hint-syntax">`code`</span><span class="hint-desc">Inline code</span>
+                                <span class="hint-syntax">= Title =</span><span class="hint-desc">Heading 1</span>
+                                <span class="hint-syntax">== Title ==</span><span class="hint-desc">Heading 2</span>
+                                <span class="hint-syntax">=== Title ===</span><span class="hint-desc">Heading 3</span>
+                                <span class="hint-syntax">* item</span><span class="hint-desc">Bullet list</span>
+                                <span class="hint-syntax"># item</span><span class="hint-desc">Numbered list</span>
+                                <span class="hint-syntax">&gt; text</span><span class="hint-desc">Blockquote</span>
+                                <span class="hint-syntax">---</span><span class="hint-desc">Divider line</span>
+                                <span class="hint-syntax">[[url|text]]</span><span class="hint-desc">Hyperlink</span>
+                            </div>
+                        </div>
+                        <textarea id="pageContent" rows="16" placeholder="Document the wisdom of @DejaRu22...
 
-Format with ancient structure:
-== THE AWAKENING ==
-Core truths that shatter limiting beliefs
+= MAIN TITLE =
+== Section Heading ==
+=== Sub-Heading ===
 
-== SACRED INSIGHTS ==
-* First principle of transformation
-* Second truth of power
-* Third pillar of obsession
+* Bullet item
+# Numbered item
+> Quoted wisdom here
 
-== DEEPER WISDOM ==
-'''EMPHASIZED TRUTH''' - It comes from within
-''Subtle wisdom'' - The path reveals itself"></textarea>
+'''Bold'''   ''Italic''   ~~Strikethrough~~
+`inline code`   [[https://url.com|Link Text]]
+---"></textarea>
                     </div>
                     <button id="generateBtn" class="btn-primary">IGNITE THE FLAME</button>
                     <button id="savePageBtn" class="btn-primary" style="display: none;">UPDATE WISDOM</button>
@@ -102,21 +180,25 @@ Core truths that shatter limiting beliefs
 
                 <div class="display-section" id="displaySection" style="display: none;">
                     <div class="page-actions">
+                        <button id="backToTocBtn" class="btn-secondary">← Back to Contents</button>
                         <button id="newPageBtn" class="btn-primary">New Teaching</button>
                         <button id="editBtn" class="btn-secondary">Edit</button>
                         <button id="deleteBtn" class="btn-delete">Terminate</button>
                         <button id="copyBtn" class="btn-secondary">Copy</button>
                     </div>
                     <h1 id="displayTitle" class="article-title"></h1>
+                    <div id="displayTags" class="article-categories"></div>
                     <div class="article-metadata">
-                        <p><span class="hieroglyph">𓂀</span> From the Archives of @DejaRu22 <span class="hieroglyph">𓆃</span></p>
+                    From the Archives of @DejaRu22
                     </div>
                     <hr>
                     <div id="displayContent" class="article-content"></div>
                     <hr>
                     <div class="article-footer">
                         <p class="timestamp">Preserved: <span id="lastEdited"></span></p>
-                        <p class="footer-quote">"The flames of awakening burn eternal."</p>
+                        <button id="versionHistoryBtn" class="btn-secondary" style="margin-top: 10px;">📜 Version History</button>
+                        <div id="versionHistoryPanel" style="display: none;"></div>
+                        <p class="footer-quote">"The cosmic flames of awakening burn eternal."</p>
                     </div>
                 </div>
             </article>
@@ -125,13 +207,50 @@ Core truths that shatter limiting beliefs
 
     <footer>
         <div class="container">
-            <div class="footer-symbols">𓂀 𓆃 Ω 🪬 𓆃 𓂀</div>
+            <div class="footer-symbols">✦ ☽ ☆ ⋆ ☾ ✧ ⟡ ☾ ⋆ ☆ ☽ ✦</div>
             <p class="footer-main">DEJARU ARCHIVES</p>
-            <p class="footer-tagline">Fanning The Flames of Man's Awakening Since 2026</p>
-            <p class="footer-credit">@DejaRu22 | Ancient Wisdom • Modern Truth • Eternal Transformation</p>
+            <p class="footer-tagline">fixated on infinity 𓂀 preternatural inculcations & anagoge 𓆃  fanning the flames of man’s awakening</p>
+            <p class="footer-credit">Namaste</p>
         </div>
     </footer>
 
+    <!-- Background Music Player -->
+    <div class="music-player" id="musicPlayer">
+        <div class="player-header">
+            <span class="player-icon">♫</span>
+            <span class="player-title">TERMINATE</span>
+            <button class="player-toggle" id="playerToggle">_</button>
+            <button class="player-close" id="playerClose" title="Close player">✕</button>
+        </div>
+        <div class="player-content" id="playerContent">
+            <audio id="backgroundAudio" loop>
+                <source src="music/background.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+            <div class="player-controls">
+                <button class="control-btn" id="playPauseBtn" title="Play/Pause">
+                    <span class="play-icon">▶</span>
+                    <span class="pause-icon" style="display: none;">⏸</span>
+                </button>
+                <div class="progress-container">
+                    <input type="range" class="progress-bar" id="progressBar" value="0" min="0" max="100">
+                    <div class="time-display">
+                        <span id="currentTime">0:00</span> / <span id="duration">0:00</span>
+                    </div>
+                </div>
+            </div>
+            <div class="volume-control">
+                <span class="volume-icon">🔊</span>
+                <input type="range" class="volume-slider" id="volumeSlider" value="50" min="0" max="100">
+            </div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js').catch(() => {});
+      }
+    </script>
 </body>
 </html>

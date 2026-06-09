@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Gallery 𓂀 Rubipedia</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#9400D3">
+    <link rel="stylesheet" href="media.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@400;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="mask-symbol">🌕</div>
+            <h1 class="site-title">RUBIPEDIA</h1>
+            <p class="tagline">☽ MEDIA GALLERY ☾</p>
+            <div class="lotus-divider">🪬</div>
+        </div>
+    </header>
+
+    <nav class="container" aria-label="Main navigation">
+        <div class="nav-links">
+            <a href="index.html" aria-label="Return to Archives"><span class="icon" aria-hidden="true">Ω</span> Inculcations</a>
+            <a href="media.html" class="active" aria-label="Media Gallery"><span class="icon" aria-hidden="true">✧</span> Media Gallery</a>
+        </div>
+    </nav>
+
+    <main class="container" id="mainContent">
+        <!-- Upload Section -->
+        <div class="upload-section">
+            <h2 class="section-title">✦ UPLOAD MEDIA ✦</h2>
+            <div class="upload-area" id="uploadArea">
+                <div class="upload-icon">⊹</div>
+                <p class="upload-text">Drag & drop images here</p>
+                <p class="upload-subtext">or click to browse</p>
+                <p class="upload-formats">PNG, JPG, JPEG, GIF, WEBP</p>
+                <input type="file" id="fileInput" accept="image/png,image/jpeg,image/jpg,image/gif,image/webp" multiple hidden>
+            </div>
+        </div>
+
+        <!-- Gallery Section -->
+        <div class="gallery-section">
+            <div class="gallery-header">
+                <h2 class="section-title">☽ ARCHIVED VISIONS ☾</h2>
+                <span class="image-count" id="imageCount">0 images</span>
+            </div>
+            <div class="gallery-grid" id="galleryGrid">
+                <!-- Images will be dynamically inserted here -->
+            </div>
+            <div class="gallery-empty" id="galleryEmpty">
+                <p class="empty-icon">✧</p>
+                <p>No visions archived yet.</p>
+                <p class="empty-sub">Upload images to begin your visual collection.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" style="display: none;">
+        <div class="lightbox-overlay" id="lightboxOverlay"></div>
+        <div class="lightbox-content">
+            <button class="lightbox-close" id="lightboxClose" title="Close">✕</button>
+            <button class="lightbox-nav lightbox-prev" id="lightboxPrev" title="Previous">‹</button>
+            <img class="lightbox-image" id="lightboxImage" alt="Full size image">
+            <button class="lightbox-nav lightbox-next" id="lightboxNext" title="Next">›</button>
+            <div class="lightbox-info">
+                <span class="lightbox-name" id="lightboxName"></span>
+                <button class="lightbox-delete" id="lightboxDelete" title="Delete image">🗑 Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-symbols">✦ ☽ ☆ ⋆ ☾ ✧ ⟡ ☾ ⋆ ☆ ☽ ✦</div>
+            <p class="footer-main">DEJARU ARCHIVES</p>
+            <p class="footer-credit">Namaste</p>
+        </div>
+    </footer>
+
+    <script src="media.js"></script>
+</body>
+</html>

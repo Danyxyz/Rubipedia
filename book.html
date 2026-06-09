@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book of Wisdom 𓂀 DejaRu Archives</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#9400D3">
+    <link rel="stylesheet" href="book.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=IM+Fell+English:ital@0;1&family=UnifrakturMaguntia&display=swap" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=IM+Fell+English:ital@0;1&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+</head>
+<body>
+    <a href="#bookWrapper" class="skip-link">Skip to book content</a>
+    <div class="book-container">
+        <!-- Navigation Header -->
+        <header class="book-header">
+            <a href="index.html" class="back-link" aria-label="Return to the main archives">← Return to Archives</a>
+            <h1 class="book-title">☽ BOOK OF <span class="ancient-text">WISDOM</span> ☾</h1>
+            <div class="subtitle">Ancient Teachings of DejaRu</div>
+        </header>
+
+        <!-- Book Interface -->
+        <div class="book-wrapper" id="bookWrapper">
+            <div class="book" id="book">
+                <!-- Left Page -->
+                <div class="page page-left" id="pageLeft">
+                    <div class="page-content">
+                        <div class="page-header">
+                            <div class="decorative-border-top" aria-hidden="true">✦ ⋆ ☆ ⋆ ✦</div>
+                        </div>
+                        <div class="page-body" id="leftPageBody">
+                            <!-- Content will be injected here -->
+                        </div>
+                        <div class="page-footer">
+                            <div class="page-number" id="leftPageNumber"></div>
+                        </div>
+                    </div>
+                    <div class="page-shadow"></div>
+                </div>
+
+                <!-- Right Page -->
+                <div class="page page-right" id="pageRight">
+                    <div class="page-content">
+                        <div class="page-header">
+                            <div class="decorative-border-top" aria-hidden="true">✦ ⋆ ☆ ⋆ ✦</div>
+                        </div>
+                        <div class="page-body" id="rightPageBody">
+                            <!-- Content will be injected here -->
+                        </div>
+                        <div class="page-footer">
+                            <div class="page-number" id="rightPageNumber"></div>
+                        </div>
+                    </div>
+                    <div class="page-shadow"></div>
+                </div>
+
+                <!-- Book Spine -->
+                <div class="book-spine"></div>
+            </div>
+
+            <!-- Page Turn Controls -->
+            <div class="controls">
+                <button class="control-btn prev-btn" id="prevBtn" title="Previous Page" aria-label="Go to previous page">
+                    <span class="arrow" aria-hidden="true">◄</span>
+                    <span class="btn-text">Previous</span>
+                </button>
+                
+                <div class="page-indicator">
+                    <span id="currentPageSpan">1-2</span> of <span id="totalPagesSpan">0</span>
+                </div>
+
+                <button class="control-btn next-btn" id="nextBtn" title="Next Page" aria-label="Go to next page">
+                    <span class="btn-text">Next</span>
+                    <span class="arrow" aria-hidden="true">►</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Chapter Selection -->
+        <aside class="chapter-sidebar" id="chapterSidebar">
+            <div class="sidebar-header">
+                <h3>☽ CHAPTERS ☾</h3>
+                <div class="lotus-divider">⋆ ✦ ⋆</div>
+            </div>
+            <div class="chapter-list" id="chapterList">
+                <!-- Chapters will be loaded here -->
+            </div>
+        </aside>
+
+        <!-- Loading State -->
+        <div class="loading-message" id="loadingMessage">
+            <div class="ancient-symbol">☽◯☾</div>
+            <p>Loading Sacred Texts...</p>
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-message" id="emptyMessage" style="display: none;">
+            <div class="ancient-symbol">✦</div>
+            <p>No wisdom has been recorded yet.</p>
+            <a href="index.html" class="create-link">Create your first inculcation →</a>
+        </div>
+    </div>
+
+    <script src="book.js"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js').catch(() => {});
+      }
+    </script>
+</body>
+</html>

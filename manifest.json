@@ -1,0 +1,16 @@
+{
+  "name": "Rubipedia",
+  "short_name": "Rubipedia",
+  "description": "Unofficial digital archive of @DejaRu22's teachings and wisdom",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#0a0015",
+  "theme_color": "#9400D3",
+  "icons": [
+    {
+      "src": "Images/banner.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}
